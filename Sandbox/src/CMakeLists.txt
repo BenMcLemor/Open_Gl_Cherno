@@ -12,6 +12,7 @@ include_directories(${MyProject_SOURCE_DIR}/Sandbox/include
                     )
 # I assume you want to use LibProject as a library in HazelProject.
 include_directories(${MyProject_SOURCE_DIR}/Hazel/include)
+include_directories(${MyProject_SOURCE_DIR}/Hazel/vendor/spdlog/include)
 link_directories(${MyProject_SOURCE_DIR}/Hazel/src)
 link_directories(${MyProject_SOURCE_DIR}/Sandbox/src)
 #add_executable(Sandbox Sandbox.cpp)
