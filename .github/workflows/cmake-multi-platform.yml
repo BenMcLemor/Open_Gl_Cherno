@@ -75,7 +75,7 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
 
     - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v0.0.27
+      uses: mr-smithers-excellent/docker-build-push@v4
       with:
         image: benmclemor/my_docker_opengl
         registry: docker.io
