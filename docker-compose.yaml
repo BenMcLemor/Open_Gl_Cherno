@@ -44,6 +44,12 @@ RUN apt update && \
     apt update && \
     apt upgrade
 
+RUN mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j4
+
+
 # Set entrypoint
 #ENTRYPOINT ["echo" , "Try Best APM Monitoring Tool at atatus.com"]  -D FOREGROUND
 #ENTRYPOINT code -D FOREGROUND
