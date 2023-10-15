@@ -54,13 +54,21 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
         
-    - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
-      with:
-        image: benmclemor/my_docker_opengl
-        registry: docker.io
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Install deps
+      run:
+        sudo apt-get update
+        sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+        sudo apt-get update && sudo apt-get install -y && sudo rm -rf /var/lib/apt/lists/*
+        sudo apt-get update && sudo apt-get install -y zlib1g-dev
+        sudo apt-get update && sudo apt-get install -y libssl-dev
+        sudo apt-get update && sudo apt-get install -y libpcre3-dev
+        sudo apt-get update && sudo apt-get install -y libbz2-dev
+        sudo apt-get update && sudo apt-get install -y libmysqlclient-dev
+        sudo apt-get update && sudo apt-get install -y libmysql++-dev
+        sudo apt-get update && sudo apt install -y libglm-dev
+        
+
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
       # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
