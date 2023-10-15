@@ -54,18 +54,20 @@ jobs:
       run: |
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
         
-
-    - name: Install deps
+    - name: Install deps update
       run:
         sudo apt-get update && sudo apt-get install -y && sudo rm -rf /var/lib/apt/lists/*
-        sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
-        sudo apt-get update && sudo apt-get install -y zlib1g-dev
-        sudo apt-get update && sudo apt-get install -y libssl-dev
-        sudo apt-get update && sudo apt-get install -y libpcre3-dev
-        sudo apt-get update && sudo apt-get install -y libbz2-dev
-        sudo apt-get update && sudo apt-get install -y libmysqlclient-dev
-        sudo apt-get update && sudo apt-get install -y libmysql++-dev
-        sudo apt-get update && sudo apt install -y libglm-dev
+        
+    - name: Install deps
+      run:
+        sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev &&
+        sudo apt-get install -y zlib1g-dev &&
+        sudo apt-get install -y libssl-dev &&
+        sudo apt-get install -y libpcre3-dev &&
+        sudo apt-get install -y libbz2-dev &&
+        sudo apt-get install -y libmysqlclient-dev &&
+        sudo apt-get install -y libmysql++-dev &&
+        sudo apt install -y libglm-dev &&
         
 
     - name: Configure CMake
