@@ -57,7 +57,7 @@ jobs:
     - name: Build and Push Docker Image
       uses: mr-smithers-excellent/docker-build-push@v4
       with:
-        image: benmclemor/my_docker_opengl:undefined
+        image: benmclemor/my_docker_opengl
         registry: docker.io
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
