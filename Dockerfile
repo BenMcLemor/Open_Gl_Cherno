@@ -16,17 +16,21 @@ RUN apt-get update && apt-get install -y gcc-9 g++ gdb
 #installing CMAKE
 RUN apt-get update && apt-get install -y cmake vim
 
+## Install git
+RUN apt-get update && apt-get install -y git
+
 # Install packages
 ## install glfw3
-RUN apt-get install -y libglfw3 && apt-get install -y libglfw3-dev
+RUN apt-get update && apt-get install -y libglfw3 && apt-get install -y libglfw3-dev
 ## install OpenGL
-RUN apt-get install -y freeglut3-dev libglew1.5 libglew1.5-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
-#RUN git clone https://github.com/Dav1dde/glad.git && \
+RUN apt-get update && apt-get install -y freeglut3-dev libglew1.5 libglew1.5-dev libglu1-mesa libglu1-mesa-dev libgl1-mesa-glx libgl1-mesa-dev
+# add spdlog subdirectory
+RUN apt-get update && git clone https://github.com/gabime/spdlog /home/app/Hazel/vendor/spdlog 
 #    cd glad; cmake ./; make; cp -a include /usr/local/
 # install GML
-RUN apt-get install -y libglm-dev libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxrandr-dev libxext-dev libxcursor-dev libxinerama-dev libxi-dev 
+RUN apt-get update && apt-get install -y libglm-dev libx11-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxrandr-dev libxext-dev libxcursor-dev libxinerama-dev libxi-dev 
 #install OpenGL
-#RUN apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+#RUN apt-get update && apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
 #install vulkan
 #RUN add-apt-repository ppa:oibaf/graphics-drivers && \
 RUN apt update && \
@@ -34,7 +38,7 @@ RUN apt update && \
     apt-get install -y libvulkan1 mesa-vulkan-drivers vulkan-utils
 
 #others dependencies
-RUN apt-get install -y 
+# RUN apt-get update apt-get install -y 
 # install VS code
 RUN apt update && \
     apt install -y software-properties-common apt-transport-https wget && \
@@ -43,6 +47,12 @@ RUN apt update && \
     apt-get install -y code && \
     apt update && \
     apt upgrade
+
+RUN mkdir build && \
+    cd build && \
+    cmake .. && \
+    make -j4
+
 
 # Set entrypoint
 #ENTRYPOINT ["echo" , "Try Best APM Monitoring Tool at atatus.com"]  -D FOREGROUND
